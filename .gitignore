@@ -1,0 +1,37 @@
+# Go build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go cache
+*.mod
+*.sum
+vendor/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# tmp folder for air
+/tmp/
+tmp/
+
+# Logs
+*.log
+
+# Node modules (if frontend exists)
+node_modules/
+
+# Ignore env files
+.env
+.env.local
+.env.*.local

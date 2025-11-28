@@ -1,0 +1,46 @@
+
+
+
+
+### Login request
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123"
+}
+
+
+
+
+### Health check
+GET http://localhost:8080/
+
+### Get all users
+GET http://localhost:8080/users
+Accept: application/json
+
+### Create a new user
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Bob"
+}
+
+### Get user by ID (if you implement it later)
+GET http://localhost:8080/users/1
+Accept: application/json
+
+### Update user (if you implement)
+PUT http://localhost:8080/users/2
+Content-Type: application/json
+
+{
+  "name": "Updated Name"
+}
+
+### Delete user (if you implement)
+DELETE http://localhost:8080/users/2
