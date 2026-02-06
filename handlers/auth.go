@@ -17,12 +17,7 @@ func Login(c echo.Context) error {
 		return echo.ErrBadRequest
 	}
 
-	// ✅ Validate credentials (demo logic)
-	if req.Username != "admin" || req.Password != "123" {
-		return echo.ErrUnauthorized
-	}
-
-	isAdmin := true
+	isAdmin := false
 
 	token, err := utils.GenerateToken(req.Username, isAdmin)
 	if err != nil {

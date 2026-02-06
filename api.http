@@ -16,6 +16,9 @@ Content-Type: application/json
 GET http://localhost:8080/api/profile
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDQyODg0OSwiaWF0IjoxNzcwMzQyNDQ5fQ.xcgrLOjdncFGUJOwOQCdekzBwdjTbrWWCA250ZgWfwE
 
+###
+GET http://localhost:8080/api/admin/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOmZhbHNlLCJleHAiOjE3NzA0MjkyOTIsImlhdCI6MTc3MDM0Mjg5Mn0.3-1vTiF5Oe3ogAIJscJznQrIes44syHCKc2nCQd13zA
 
 
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"echo-demo/handlers"
+	"echo-demo/middlewares"
 	"echo-demo/utils"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -28,7 +29,14 @@ func main() {
 		},
 	}))
 
+	// Any authenticated user
 	api.GET("/profile", handlers.Profile)
+
+	// 🔒 Admin-only routes
+	admin := api.Group("/admin")
+	admin.Use(middlewares.AdminOnly)
+
+	admin.GET("/dashboard", handlers.AdminDashboard)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
