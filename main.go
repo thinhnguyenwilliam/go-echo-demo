@@ -18,6 +18,9 @@ func main() {
 
 	// Public route
 	e.POST("/login", handlers.Login)
+	e.GET("/stream", handlers.Stream)
+	e.GET("/stream-json", handlers.StreamJSON)
+	e.GET("/stream/sse", handlers.StreamSSE)
 
 	// JWT protected routes
 	api := e.Group("/api")
