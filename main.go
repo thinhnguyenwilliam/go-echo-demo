@@ -1,59 +1,33 @@
 package main
 
 import (
-	"bytes"
-	"io"
-	"log"
-	"net/http"
+	"echo-demo/handlers"
+	"echo-demo/utils"
 
+	"github.com/golang-jwt/jwt/v5"
+	jwtmiddleware "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
-
-type LoginResponse struct {
-	Token string `json:"token"`
-}
-
-type LoginRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
-func login(c echo.Context) error {
-	// Read raw body
-	body, _ := io.ReadAll(c.Request().Body)
-	log.Println("Raw body:", string(body))
-
-	// Restore to allow Bind()
-	c.Request().Body = io.NopCloser(bytes.NewBuffer(body))
-
-	req := new(LoginRequest)
-
-	// Bind JSON → struct
-	if err := c.Bind(req); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{
-			"error": "invalid request",
-		})
-	}
-
-	// Log request data
-	log.Printf("LoginRequest is: %#v\n", req)
-
-	// Dummy login logic
-	if req.Username == "admin1" && req.Password == "123" {
-		return c.JSON(http.StatusOK, LoginResponse{
-			Token: "fake-jwt-token",
-		})
-	}
-
-	return c.JSON(http.StatusUnauthorized, map[string]string{
-		"error": "invalid credentials",
-	})
-}
 
 func main() {
 	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover()) // 👈 VERY important
 
-	e.POST("/login", login)
+	// Public route
+	e.POST("/login", handlers.Login)
+
+	// JWT protected routes
+	api := e.Group("/api")
+	api.Use(jwtmiddleware.WithConfig(jwtmiddleware.Config{
+		SigningKey: utils.JwtSecret,
+		NewClaimsFunc: func(c echo.Context) jwt.Claims {
+			return new(utils.JwtCustomClaims)
+		},
+	}))
+
+	api.GET("/profile", handlers.Profile)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

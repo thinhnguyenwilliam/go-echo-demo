@@ -1,5 +1,6 @@
-
-
+###
+GET http://localhost:8080/protected
+Authorization: Basic YWRtaW46MTIz
 
 
 ### Login request
@@ -10,6 +11,10 @@ Content-Type: application/json
   "username": "admin",
   "password": "123"
 }
+
+###
+GET http://localhost:8080/api/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNfYWRtaW4iOnRydWUsImV4cCI6MTc3MDQyNjcxNCwiaWF0IjoxNzcwMzQwMzE0fQ.6J5wD-mTfXumFQF_LfJ1Dn9R8K-YJWVWCDTPk7g0sf4
 
 
 
