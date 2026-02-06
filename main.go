@@ -21,6 +21,7 @@ func main() {
 	// JWT protected routes
 	api := e.Group("/api")
 	api.Use(jwtmiddleware.WithConfig(jwtmiddleware.Config{
+		ContextKey: "user", // default, but explicit is good
 		SigningKey: utils.JwtSecret,
 		NewClaimsFunc: func(c echo.Context) jwt.Claims {
 			return new(utils.JwtCustomClaims)
